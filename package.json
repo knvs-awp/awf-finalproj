@@ -1,0 +1,30 @@
+{
+  "name": "solo101",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "dev": "npm run dev --workspace ./server",
+    "build": "npm run build --workspace ./server",
+    "typecheck": "npm run typecheck --workspace ./server",
+    "start": "npm run start --workspace ./server"
+  },
+  "engines": {
+    "node": "22.x",
+    "npm": ">=10"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/knvs-awp/awf-finalproj.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/knvs-awp/awf-finalproj/issues"
+  },
+  "homepage": "https://github.com/knvs-awp/awf-finalproj#readme",
+  "private": true,
+  "workspaces": [
+    "server"
+  ]
+}
