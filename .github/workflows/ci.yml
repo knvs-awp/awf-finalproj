@@ -1,0 +1,50 @@
+name: backend checks
+
+# pushes check the code on each branch, while pull requests also check whether the
+# proposed changes build together with the branch they are being merged into
+on:
+  push:
+  pull_request:
+
+# the workflow needs to read the repository, so its token receives no write permissions
+permissions:
+  contents: read
+
+# a newer run for the same branch or pull request replaces an older unfinished run,
+# which avoids spending time checking code that has already been superseded
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  backend:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+
+    steps:
+      # the commit hashes pin the action code, and the version labels identify the
+      # releases they came from so updates can be reviewed explicitly later
+      - name: check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: set up node
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+          # this caches downloaded npm packages, while npm ci still creates a fresh
+          # node_modules directory from the committed workspace lockfile on every run
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      # running from the repository root installs the backend workspace too, and npm
+      # ci fails if package.json and the lockfile disagree instead of updating the lockfile
+      - name: install dependencies
+        run: npm ci
+
+      - name: check types
+        run: npm run typecheck
+
+      - name: build backend
+        run: npm run build

@@ -1,4 +1,4 @@
-// the javascript extension matches the file that node loads after typescript compiles it.
+// the javascript extension matches the file that node loads after typescript compiles it
 import { app } from './app.js';
 
 const host = process.env['HOST'] ?? '127.0.0.1';
