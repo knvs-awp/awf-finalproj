@@ -1,12 +1,11 @@
 {
   "name": "solo101",
   "version": "1.0.0",
-  "description": "",
   "scripts": {
-    "dev": "npm run dev --workspace ./server",
-    "build": "npm run build --workspace ./server",
-    "typecheck": "npm run typecheck --workspace ./server",
-    "start": "npm run start --workspace ./server"
+    "dev": "npm run dev --workspace ./backend",
+    "build": "npm run build --workspaces",
+    "typecheck": "npm run typecheck --workspaces",
+    "start": "npm run start --workspace ./backend"
   },
   "engines": {
     "node": "22.x",
@@ -16,8 +15,6 @@
     "type": "git",
     "url": "git+https://github.com/knvs-awp/awf-finalproj.git"
   },
-  "keywords": [],
-  "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/knvs-awp/awf-finalproj/issues"
@@ -25,6 +22,10 @@
   "homepage": "https://github.com/knvs-awp/awf-finalproj#readme",
   "private": true,
   "workspaces": [
-    "server"
-  ]
+    "contracts",
+    "backend"
+  ],
+  "devDependencies": {
+    "typescript": "6.0.3"
+  }
 }

@@ -38,7 +38,7 @@ jobs:
           cache: npm
           cache-dependency-path: package-lock.json
 
-      # running from the repository root installs the backend workspace too, and npm
+      # running from the repository root installs the backend and shared contracts, and npm
       # ci fails if package.json and the lockfile disagree instead of updating the lockfile
       - name: install dependencies
         run: npm ci

@@ -3,7 +3,7 @@ dist/
 coverage/
 *.tsbuildinfo
 
-# keep local credentials out of git while allowing safe configuration examples
+# local credentials are ignored, while example env files remain tracked
 .env
 .env.*
 !.env.example
