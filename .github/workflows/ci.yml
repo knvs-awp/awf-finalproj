@@ -1,4 +1,4 @@
-name: backend checks
+name: project checks
 
 # pushes check the code on each branch, while pull requests also check whether the
 # proposed changes build together with the branch they are being merged into
@@ -17,7 +17,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  backend:
+  checks:
     runs-on: ubuntu-24.04
     timeout-minutes: 10
 
@@ -38,7 +38,7 @@ jobs:
           cache: npm
           cache-dependency-path: package-lock.json
 
-      # running from the repository root installs the backend and shared contracts, and npm
+      # running from the repository root installs all workspaces, and npm
       # ci fails if package.json and the lockfile disagree instead of updating the lockfile
       - name: install dependencies
         run: npm ci
@@ -46,5 +46,5 @@ jobs:
       - name: check types
         run: npm run typecheck
 
-      - name: build backend
+      - name: build workspaces
         run: npm run build

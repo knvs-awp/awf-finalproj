@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "npm run dev --workspace ./backend",
+    "dev:frontend": "npm run dev --workspace ./frontend",
     "build": "npm run build --workspaces",
     "typecheck": "npm run typecheck --workspaces",
     "start": "npm run start --workspace ./backend",
@@ -25,7 +26,8 @@
   "private": true,
   "workspaces": [
     "contracts",
-    "backend"
+    "backend",
+    "frontend"
   ],
   "devDependencies": {
     "typescript": "6.0.3"
