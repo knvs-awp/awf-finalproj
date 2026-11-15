@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022"],
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "types": ["node"],
+
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+
+    // drizzle ships declarations for optional database drivers, so check our own
+    // strict types without requiring unrelated postgres, sqlite, or gel dependencies
+    "skipLibCheck": true,
+
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "noEmitOnError": true
+  },
+  "include": ["src/**/*.ts"]
+}

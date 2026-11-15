@@ -1,0 +1,13 @@
+{
+  "version": "7",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1794717970594,
+      "tag": "0000_create_profiles",
+      "breakpoints": true
+    }
+  ]
+}

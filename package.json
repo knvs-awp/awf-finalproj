@@ -1,0 +1,40 @@
+{
+  "name": "solo101",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "npm run dev --workspace ./backend",
+    "dev:frontend": "npm run dev --workspace ./frontend",
+    "build": "npm run build --workspaces",
+    "typecheck": "npm run typecheck --workspaces",
+    "start": "npm run start --workspace ./backend",
+    "db:generate": "npm run db:generate --workspace ./backend --",
+    "db:migrate": "npm run db:migrate --workspace ./backend"
+  },
+  "engines": {
+    "node": "22.x",
+    "npm": ">=10"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/knvs-awp/awf-finalproj.git"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/knvs-awp/awf-finalproj/issues"
+  },
+  "homepage": "https://github.com/knvs-awp/awf-finalproj#readme",
+  "private": true,
+  "workspaces": [
+    "contracts",
+    "backend",
+    "frontend"
+  ],
+  "devDependencies": {
+    "typescript": "6.0.3"
+  },
+  "overrides": {
+    "@esbuild-kit/core-utils": {
+      "esbuild": "0.28.2"
+    }
+  }
+}
