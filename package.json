@@ -5,7 +5,8 @@
     "dev": "npm run dev --workspace ./backend",
     "build": "npm run build --workspaces",
     "typecheck": "npm run typecheck --workspaces",
-    "start": "npm run start --workspace ./backend"
+    "start": "npm run start --workspace ./backend",
+    "db:generate": "npm run db:generate --workspace ./backend --"
   },
   "engines": {
     "node": "22.x",

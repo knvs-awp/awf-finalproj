@@ -5,7 +5,8 @@
     "dev": "node --watch --env-file-if-exists=.env --import tsx src/server.ts",
     "build": "tsc --project tsconfig.json",
     "typecheck": "tsc --project tsconfig.json --noEmit",
-    "start": "node --env-file-if-exists=.env dist/server.js"
+    "start": "node --env-file-if-exists=.env dist/server.js",
+    "db:generate": "drizzle-kit generate --config drizzle.config.ts"
   },
   "license": "ISC",
   "type": "module",
