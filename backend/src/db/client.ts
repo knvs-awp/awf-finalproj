@@ -33,7 +33,7 @@ export function create_database(database_url = process.env['DATABASE_URL']) {
     waitForConnections: true,
     queueLimit: 20,
     timezone: 'Z',
-    charset: 'utf8mb4_0900_as_cs',
+    charset: 'utf8mb4',
   });
 
   return { db: drizzle(pool, { schema, mode: 'default' }), pool };
