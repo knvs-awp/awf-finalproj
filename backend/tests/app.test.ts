@@ -23,24 +23,37 @@ describe('app', () => {
     });
 
     describe('GET /health', () => {
-    it('responds 200 with status ok', async () => {
-      const response = await fetch(`${base_url}/health`);
-      assert.equal(response.status, 200);
-      assert.deepEqual(await response.json(), { status: 'ok' });
+        it('responds 200 with status ok', async () => {
+        const response = await fetch(`${base_url}/health`);
+        assert.equal(response.status, 200);
+        assert.deepEqual(await response.json(), { status: 'ok' });
+        });
+
+        it('responds with a json content type', async () => {
+        const response = await fetch(`${base_url}/health`);
+        assert.match(response.headers.get('content-type') ?? '', /application\/json/);
+        });
+
+        it('does not require a database connection', async () => {
+        // no DATABASE_URL is configured for this suite and the route must still work
+        const response = await fetch(`${base_url}/health`);
+        assert.equal(response.status, 200);
+        });
     });
 
-    it('responds with a json content type', async () => {
-      const response = await fetch(`${base_url}/health`);
-      assert.match(response.headers.get('content-type') ?? '', /application\/json/);
-    });
+    describe('unknown routes', () => {
+        it('responds 404 for an unknown path', async () => {
+            const response = await fetch(`${base_url}/does-not-exist`);
+            assert.equal(response.status, 404);
+        });
 
-    it('does not require a database connection', async () => {
-      // no DATABASE_URL is configured for this suite and the route must still work
-      const response = await fetch(`${base_url}/health`);
-      assert.equal(response.status, 200);
+        it('responds 404 for unsupported methods on /health', async () => {
+            for (const method of ['POST', 'PUT', 'DELETE']) {
+            const response = await fetch(`${base_url}/health`, { method });
+            assert.equal(response.status, 404, `${method} /health`);
+            }
+        });
     });
-  });
-
 
 
 });
