@@ -13,3 +13,4 @@ schema.test.ts: checks the profiles table’s columns, primary key, nullability,
 migration.test.ts: checks that the migration SQL, journal and snapshot match schema.ts, so a schema change without a regenerated migration fails the tests.
 
 server.test.ts: starts the real server as a child process. Invalid PORT values (abc, 0, -1, 65536, 3000.5) must fail with the port error. A valid start must log its address and serve /health.
+
