@@ -55,3 +55,57 @@ describe('require_database_url', () => {
     );
   });
 });
+
+
+describe('create_database', () => {
+  const original = process.env['DATABASE_URL'];
+
+  afterEach(() => {
+    if (original === undefined) delete process.env['DATABASE_URL'];
+    else process.env['DATABASE_URL'] = original;
+  });
+
+  it('returns a drizzle instance and a pool without connecting', async () => {
+    const { db, pool } = create_database(valid_url);
+    try {
+      assert.ok(db);
+      assert.equal(typeof pool.end, 'function');
+    } finally {
+      await pool.end();
+    }
+  });
+
+  it('configures the pool from the url', async () => {
+    const { pool } = create_database(valid_url);
+    try {
+      // mysql2 keeps the parsed connection settings on pool.pool.config.connectionConfig
+      const config = (pool as any).pool.config.connectionConfig;
+      assert.equal(config.host, '127.0.0.1');
+      assert.equal(config.port, 3306);
+      assert.equal(config.user, 'solo101');
+      assert.equal(config.database, 'solo101');
+      assert.equal((pool as any).pool.config.connectionLimit, 5);
+    } finally {
+      await pool.end();
+    }
+  });
+
+  it('falls back to process.env.DATABASE_URL', async () => {
+    process.env['DATABASE_URL'] = valid_url;
+    const { pool } = create_database();
+    try {
+      assert.equal((pool as any).pool.config.connectionConfig.database, 'solo101');
+    } finally {
+      await pool.end();
+    }
+  });
+
+  it('throws when no url is given and the env var is unset', () => {
+    delete process.env['DATABASE_URL'];
+    assert.throws(() => create_database(), /DATABASE_URL is required/);
+  });
+
+  it('throws for an invalid url', () => {
+    assert.throws(() => create_database('http://example.com/db'), /must identify a mysql database/);
+  });
+});
