@@ -16,7 +16,11 @@
 
     "rootDir": "./src",
     "outDir": "./dist",
-    "noEmitOnError": true
+    "noEmitOnError": true,
+
+    //Used to allow Auth0 to import properly
+    "esModuleInterop" : true,
+    "allowSyntheticDefaultImports": true
   },
   "include": ["src/**/*.ts"]
 }

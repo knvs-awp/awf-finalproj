@@ -36,5 +36,8 @@
     "@esbuild-kit/core-utils": {
       "esbuild": "0.28.2"
     }
+  },
+  "dependencies": {
+    "express-openid-connect": "2.20.2"
   }
 }
